@@ -1,93 +1,74 @@
-Détection d'Emails de Phishing (Phishing Email Detection)
-Ce projet vise à analyser et à classer des courriers électroniques pour identifier s'il s'agit d'emails légitimes (Safe Email) ou de tentatives d'hameçonnage (Phishing Email) en utilisant des techniques d'apprentissage automatique (Machine Learning) et de traitement du langage naturel (NLP).
+🛡️ Détection d'Emails de Phishing (Phishing Email Detection)
+Ce projet utilise des techniques d'Apprentissage Automatique (Machine Learning) et de Traitement du Langage Naturel (NLP) pour classer les courriels en deux catégories : emails légitimes (Safe Email) ou tentatives d'hameçonnage (Phishing Email).
 
 📂 Structure du Projet
-data_exploration.ipynb : Carnet Jupyter dédié à l'analyse exploratoire des données (EDA), au nettoyage et à la visualisation du jeu de données initial.
+data_exploration.ipynb : 🔍 Carnet Jupyter dédié à l'analyse exploratoire (EDA), au nettoyage et à la visualisation des données.
 
-model.py : Script Python pour l'entraînement, l'évaluation et la sauvegarde des modèles de classification.
+model.py : ⚙️ Script Python pour l'entraînement, l'évaluation et l'exportation des modèles de classification.
 
-📊 Analyse des Données (Exploration)
-Le projet utilise un jeu de données contenant environ 18 650 emails.
+../notebook/ : Contient les fichiers CSV de données (data_for_use.csv, numero.csv).
 
-Distribution des classes : Environ 60,7% d'emails sains et 39,3% d'emails de phishing.
+../model/ : Dossier de destination pour les modèles entraînés (fichiers .joblib).
 
-Prétraitement : * Gestion des valeurs manquantes et des doublons.
+📊 Analyse des Données (EDA)
+Le projet s'appuie sur un jeu de données d'environ 18 650 emails.
 
-Nettoyage du texte (suppression des stop-words, mise en minuscule, etc.).
+🧹 Prétraitement
+Nettoyage : Gestion des valeurs manquantes et suppression des doublons.
 
-Extraction de caractéristiques numériques à partir du texte.
+NLP : Mise en minuscule, suppression des stop-words et ponctuation.
+
+Ingénierie de caractéristiques : Extraction de données numériques (longueur du texte, présence de caractères spéciaux, etc.).
+
+📈 Distribution des Classes
+Safe Email : ~60,7%
+
+Phishing Email : ~39,3%
 
 [Image d'un graphique à barres montrant la distribution entre les classes "Safe Email" et "Phishing Email"]
 
-🤖 Modélisation
-Le script model.py met en place un pipeline de traitement complet :
+🤖 Modélisation & Pipeline
+Le script model.py implémente un pipeline robuste :
 
-Vectorisation : Utilisation de TfidfVectorizer pour transformer le texte traité en vecteurs numériques.
+Vectorisation : Utilisation de TfidfVectorizer pour convertir le texte en vecteurs numériques.
 
-Modèles testés : Le script compare plusieurs algorithmes de classification, notamment :
+Algorithmes testés :
 
-Régression Logistique (LogisticRegression).
+LogisticRegression (Régression Logistique)
 
-Machines à Vecteurs de Support (SVC).
+SVC (Machines à Vecteurs de Support)
 
-Forêt Aléatoire (RandomForestClassifier).
+RandomForestClassifier (Forêt Aléatoire)
 
-Évaluation : Les modèles sont évalués selon plusieurs métriques : Accuracy, Précision, Rappel (Recall), F1-Score et ROC-AUC.
+Métriques d'évaluation :
 
-🛠️ Installation et Utilisation
+✅ Accuracy
 
+🎯 Précision & Rappel (Recall)
 
-Gemini a dit
-Voici une proposition de fichier README.md basée sur le contenu de vos fichiers data_exploration.ipynb et model.py. Ce document présente une vue d'ensemble de votre projet de détection de phishing.
+⚖️ F1-Score
 
-Détection d'Emails de Phishing (Phishing Email Detection)
-Ce projet vise à analyser et à classer des courriers électroniques pour identifier s'il s'agit d'emails légitimes (Safe Email) ou de tentatives d'hameçonnage (Phishing Email) en utilisant des techniques d'apprentissage automatique (Machine Learning) et de traitement du langage naturel (NLP).
-
-📂 Structure du Projet
-data_exploration.ipynb : Carnet Jupyter dédié à l'analyse exploratoire des données (EDA), au nettoyage et à la visualisation du jeu de données initial.
-
-model.py : Script Python pour l'entraînement, l'évaluation et la sauvegarde des modèles de classification.
-
-📊 Analyse des Données (Exploration)
-Le projet utilise un jeu de données contenant environ 18 650 emails.
-
-Distribution des classes : Environ 60,7% d'emails sains et 39,3% d'emails de phishing.
-
-Prétraitement : * Gestion des valeurs manquantes et des doublons.
-
-Nettoyage du texte (suppression des stop-words, mise en minuscule, etc.).
-
-Extraction de caractéristiques numériques à partir du texte.
-
-[Image d'un graphique à barres montrant la distribution entre les classes "Safe Email" et "Phishing Email"]
-
-🤖 Modélisation
-Le script model.py met en place un pipeline de traitement complet :
-
-Vectorisation : Utilisation de TfidfVectorizer pour transformer le texte traité en vecteurs numériques.
-
-Modèles testés : Le script compare plusieurs algorithmes de classification, notamment :
-
-Régression Logistique (LogisticRegression).
-
-Machines à Vecteurs de Support (SVC).
-
-Forêt Aléatoire (RandomForestClassifier).
-
-Évaluation : Les modèles sont évalués selon plusieurs métriques : Accuracy, Précision, Rappel (Recall), F1-Score et ROC-AUC.
+📊 ROC-AUC
 
 🛠️ Installation et Utilisation
-Prérequis
-Assurez-vous d'avoir installé les bibliothèques suivantes :
+1️⃣ Prérequis
+Installez les dépendances nécessaires via pip :
 
 Bash
 pip install pandas numpy scikit-learn matplotlib seaborn joblib
-Exécution
-Exploration : Ouvrez data_exploration.ipynb dans un environnement Jupyter pour visualiser les données.
+2️⃣ Exploration des données
+Pour visualiser l'analyse et les graphiques :
 
-Entraînement : Lancez le script de modélisation pour entraîner les classifieurs et sauvegarder le meilleur modèle :
+Bash
+jupyter notebook data_exploration.ipynb
+3️⃣ Entraînement du modèle
+Pour lancer l'entraînement des modèles et sauvegarder le meilleur résultat :
 
 Bash
 python model.py
-📈 Résultats
-Les résultats de l'entraînement sont sauvegardés dans un DataFrame et affichés dans la console, permettant de choisir le modèle le plus performant pour le déploiement. Le modèle final est exporté dans le dossier ../model à l'aide de joblib.
+📈 Résultats et Export
+Une fois l'exécution de model.py terminée :
+
+Un tableau comparatif des performances s'affiche dans la console.
+
+Le meilleur modèle est automatiquement sauvegardé dans le dossier ../model au format .joblib pour une utilisation ultérieure en production.
