@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.compose import ColumnTransformer
 from sklearn.metrics import (accuracy_score, precision_score, recall_score, 
                            f1_score, roc_auc_score)
@@ -33,14 +32,13 @@ print(f"distribution Test class : {np.bincount(y_test)}")
 text_features = ['processed_text']
 numerical_features = list(n.columns)
 
-# Create TF-IDF vectorizer with optimized parameters
 tfidf_vectorizer = TfidfVectorizer(
-    max_features=5000,  # Limit features to prevent overfitting
-    min_df=2,           # Ignore terms that appear in less than 2 documents
-    max_df=0.95,        # Ignore terms that appear in more than 95% of documents
-    ngram_range=(1, 3), # Use uni-grams, bi-grams, and tri-grams
+    max_features=5000,  
+    min_df=2,          
+    max_df=0.95,       
+    ngram_range=(1, 3), 
     stop_words='english',
-    sublinear_tf=True,  # Use sublinear TF scaling
+    sublinear_tf=True,  
     smooth_idf=True
 )
 
