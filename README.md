@@ -1,74 +1,126 @@
-🛡️ Détection d'Emails de Phishing (Phishing Email Detection)
-Ce projet utilise des techniques d'Apprentissage Automatique (Machine Learning) et de Traitement du Langage Naturel (NLP) pour classer les courriels en deux catégories : emails légitimes (Safe Email) ou tentatives d'hameçonnage (Phishing Email).
+# 🛡️ Détection d'Emails de Phishing
+### *Phishing Email Detection avec Machine Learning & NLP*
 
-📂 Structure du Projet
-data_exploration.ipynb : 🔍 Carnet Jupyter dédié à l'analyse exploratoire (EDA), au nettoyage et à la visualisation des données.
+> Classifiez automatiquement les emails en **légitimes** ou **tentatives de phishing** grâce à des modèles de Machine Learning entraînés sur plus de 18 000 exemples réels.
 
-model.py : ⚙️ Script Python pour l'entraînement, l'évaluation et l'exportation des modèles de classification.
+---
 
-../notebook/ : Contient les fichiers CSV de données (data_for_use.csv, numero.csv).
+## 📂 Structure du Projet
 
-../model/ : Dossier de destination pour les modèles entraînés (fichiers .joblib).
+```text
+projet-phishing/
+├── 📓 data_exploration.ipynb     # Analyse exploratoire, nettoyage et visualisations
+├── ⚙️  model.py                   # Entraînement, évaluation et export des modèles
+├── notebook/
+│   ├── data_for_use.csv          # Dataset principal
+│   └── numero.csv                # Dataset secondaire
+└── model/
+    └── *.joblib                  # Modèles entraînés (générés après exécution)
+```
 
-📊 Analyse des Données (EDA)
-Le projet s'appuie sur un jeu de données d'environ 18 650 emails.
+---
 
-🧹 Prétraitement
-Nettoyage : Gestion des valeurs manquantes et suppression des doublons.
+## 📊 Analyse Exploratoire des Données (EDA)
 
-NLP : Mise en minuscule, suppression des stop-words et ponctuation.
+Le projet s'appuie sur un jeu de données de **~18 650 emails** étiquetés.
 
-Ingénierie de caractéristiques : Extraction de données numériques (longueur du texte, présence de caractères spéciaux, etc.).
+### 🧹 Prétraitement
 
-📈 Distribution des Classes
-Safe Email : ~60,7%
+| Étape | Description |
+|---|---|
+| 🗑️ **Nettoyage** | Suppression des valeurs manquantes et des doublons |
+| 🔤 **NLP** | Mise en minuscules, suppression des stop-words et de la ponctuation |
+| 🔢 **Feature Engineering** | Extraction de variables numériques : longueur du texte, présence de caractères spéciaux, URLs, etc. |
 
-Phishing Email : ~39,3%
+### 📈 Distribution des Classes
 
-[Image d'un graphique à barres montrant la distribution entre les classes "Safe Email" et "Phishing Email"]
+```
+✅ Safe Email      ██████████████████░░░░░░░░   60,7 %
+🎣 Phishing Email  ████████████░░░░░░░░░░░░░░   39,3 %
+```
 
-🤖 Modélisation & Pipeline
-Le script model.py implémente un pipeline robuste :
+> Le déséquilibre des classes (~60/40) est modéré — les métriques de **Précision**, **Rappel** et **F1-Score** sont donc privilégiées à la simple Accuracy.
 
-Vectorisation : Utilisation de TfidfVectorizer pour convertir le texte en vecteurs numériques.
+---
 
-Algorithmes testés :
+## 🤖 Modélisation & Pipeline
 
-LogisticRegression (Régression Logistique)
+Le script `model.py` implémente un pipeline de classification complet :
 
-SVC (Machines à Vecteurs de Support)
+### 🔁 Pipeline
 
-RandomForestClassifier (Forêt Aléatoire)
+```
+Texte brut
+    │
+    ▼
+┌─────────────────────┐
+│  TF-IDF Vectorizer  │  ← Conversion texte → vecteurs numériques
+└─────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────┐
+│               Algorithmes testés                    │
+│                                                     │
+│  📐 LogisticRegression   (Régression Logistique)    │
+│  🔷 SVC                  (Support Vector Machine)   │
+│  🌲 RandomForestClassifier (Forêt Aléatoire)        │
+└─────────────────────────────────────────────────────┘
+    │
+    ▼
+  Meilleur modèle → sauvegardé dans ../model/*.joblib
+```
 
-Métriques d'évaluation :
+### 🎯 Métriques d'Évaluation
 
-✅ Accuracy
+| Métrique | Description |
+|---|---|
+| ✅ **Accuracy** | Taux global de bonne classification |
+| 🎯 **Précision** | Fiabilité des alertes phishing déclenchées |
+| 🔁 **Rappel (Recall)** | Capacité à détecter tous les phishings |
+| ⚖️ **F1-Score** | Équilibre précision / rappel |
+| 📊 **ROC-AUC** | Performance globale du classifieur |
 
-🎯 Précision & Rappel (Recall)
+---
 
-⚖️ F1-Score
+## 🛠️ Installation et Utilisation
 
-📊 ROC-AUC
+### 1️⃣ Installer les dépendances
 
-🛠️ Installation et Utilisation
-1️⃣ Prérequis
-Installez les dépendances nécessaires via pip :
-
-Bash
+```bash
 pip install pandas numpy scikit-learn matplotlib seaborn joblib
-2️⃣ Exploration des données
-Pour visualiser l'analyse et les graphiques :
+```
 
-Bash
+### 2️⃣ Explorer les données
+
+Lancez le notebook pour visualiser l'analyse et les graphiques :
+
+```bash
 jupyter notebook data_exploration.ipynb
-3️⃣ Entraînement du modèle
-Pour lancer l'entraînement des modèles et sauvegarder le meilleur résultat :
+```
 
-Bash
+### 3️⃣ Entraîner les modèles
+
+```bash
 python model.py
-📈 Résultats et Export
-Une fois l'exécution de model.py terminée :
+```
 
-Un tableau comparatif des performances s'affiche dans la console.
+---
 
-Le meilleur modèle est automatiquement sauvegardé dans le dossier ../model au format .joblib pour une utilisation ultérieure en production.
+## 📈 Résultats et Export
+
+Une fois `model.py` exécuté :
+
+- 📋 Un **tableau comparatif** des performances s'affiche dans la console
+- 💾 Le **meilleur modèle** est automatiquement sauvegardé au format `.joblib` dans `../model/`
+- 🚀 Le fichier `.joblib` est prêt à être intégré dans un pipeline de **production**
+
+---
+
+## 📦 Dépendances
+
+| Package | Rôle |
+|---|---|
+| `pandas` / `numpy` | Manipulation et traitement des données |
+| `scikit-learn` | Modélisation, vectorisation et évaluation |
+| `matplotlib` / `seaborn` | Visualisations et graphiques |
+| `joblib` | Sauvegarde et chargement des modèles |
